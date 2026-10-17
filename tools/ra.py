@@ -40,6 +40,8 @@ RUNS = ROOT / "runs"
 OPENALEX = "https://api.openalex.org/works"
 CROSSREF = "https://api.crossref.org/works/"
 MAILTO = os.environ.get("CONTACT_EMAIL", "")  # optional: OpenAlex/Crossref polite pool, Unpaywall
+SCIHUB_URL = os.environ.get("SCIHUB_URL", "")         # e.g. https://sci-hub.se or local instance URL
+EZPROXY_PREFIX = os.environ.get("EZPROXY_PREFIX", "")  # e.g. https://ezproxy.univ.edu/login?url=
 UA_API = f"research-answer/0.1 (mailto:{MAILTO})" if MAILTO else "research-answer/0.1"
 UA_BROWSER = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
               "(KHTML, like Gecko) Chrome/128.0 Safari/537.36")
@@ -158,6 +160,38 @@ def search_openalex(query: str, since: int, n: int) -> list[dict]:
     return out
 
 
+def fetch_by_doi(doi: str) -> dict | None:
+    """Fetch one paper's metadata from OpenAlex by exact DOI (bypasses ranking cutoffs)."""
+    doi = doi.lower().removeprefix("https://doi.org/")
+    params = {"select": "id,doi,title,publication_year,primary_location,cited_by_count,"
+                        "authorships,type,open_access,best_oa_location,abstract_inverted_index"}
+    if MAILTO:
+        params["mailto"] = MAILTO
+    try:
+        r = api.get(f"{OPENALEX}/doi:{quote(doi, safe='/()')}", params=params, timeout=30)
+        if r.status_code != 200:
+            return None
+        w = r.json()
+        src = (w.get("primary_location") or {}).get("source") or {}
+        oa = w.get("open_access") or {}
+        return {
+            "openalex": w["id"].rsplit("/", 1)[-1],
+            "doi": (w.get("doi") or "").replace("https://doi.org/", "").lower(),
+            "title": re.sub(r"<[^>]+>", "", w.get("title") or ""),
+            "authors": [x["author"]["display_name"] for x in w.get("authorships", [])[:4] if x.get("author")],
+            "year": w.get("publication_year"),
+            "venue": src.get("display_name") or "",
+            "type": w.get("type"),
+            "cited_by": w.get("cited_by_count", 0),
+            "oa_status": oa.get("oa_status") or "closed",
+            "license": (w.get("best_oa_location") or {}).get("license") or "",
+            "abstract": abstract_from_index(w.get("abstract_inverted_index"))[:1200],
+            "score": 0.0,
+        }
+    except (requests.RequestException, ValueError):
+        return None
+
+
 def verify_doi(doi: str) -> dict | None:
     """Crossref record for a DOI, or None if the DOI does not exist."""
     if not doi:
@@ -195,6 +229,19 @@ def cmd_search(a) -> int:
         print(f"[search] {len(res):>3} hits  {q}")
         time.sleep(0.5)
 
+    for doi in (a.seed_dois or []):
+        doi_clean = doi.lower().removeprefix("https://doi.org/")
+        if doi_clean in hits:
+            print(f"[seed]  already in hits: {doi_clean}")
+            continue
+        w = fetch_by_doi(doi_clean)
+        if w and w["title"]:
+            hits[doi_clean] = w | {"queries": ["[seed]"]}
+            print(f"[seed]  {doi_clean} — {w['title'][:60]}")
+        else:
+            print(f"[seed]  not found in OpenAlex: {doi_clean}", file=sys.stderr)
+        time.sleep(0.2)
+
     kept, dropped = [], 0
     for w in sorted(hits.values(), key=lambda w: (-len(w["queries"]), -w["score"])):
         cr = verify_doi(w["doi"])
@@ -225,6 +272,26 @@ def cmd_search(a) -> int:
 
 # ---------- fetch ----------
 
+def scihub_pdf_url(s: requests.Session, doi: str) -> str | None:
+    """Resolve a Sci-Hub page to the direct PDF URL, or None if unavailable or SCIHUB_URL unset."""
+    if not SCIHUB_URL:
+        return None
+    try:
+        r = s.get(f"{SCIHUB_URL.rstrip('/')}/{doi}", timeout=30, allow_redirects=True)
+        if r.status_code != 200:
+            return None
+        for pat in (rb'<iframe[^>]+src=["\']([^"\']+\.pdf[^"\']*)["\']',
+                    rb'<embed[^>]+src=["\']([^"\']+\.pdf[^"\']*)["\']',
+                    rb'"pdf_url"\s*:\s*"([^"]+)"'):
+            m = re.search(pat, r.content, re.IGNORECASE)
+            if m:
+                u = m.group(1).decode()
+                return ("https:" + u) if u.startswith("//") else u
+    except (requests.RequestException, ValueError):
+        pass
+    return None
+
+
 def oa_urls(s: requests.Session, doi: str) -> list[str]:
     urls: list[str] = []
     try:
@@ -253,6 +320,16 @@ def oa_urls(s: requests.Session, doi: str) -> list[str]:
         except (requests.RequestException, ValueError):
             pass
     urls.sort(key=lambda u: 0 if "pdf" in u.lower() else 1)
+    # Institutional access via EZproxy (tried after OA sources; needs valid session cookie)
+    if EZPROXY_PREFIX:
+        ezp = f"{EZPROXY_PREFIX}https://doi.org/{doi}"
+        if ezp not in urls:
+            urls.append(ezp)
+    # Sci-Hub (last resort; resolves HTML page to direct PDF URL)
+    if SCIHUB_URL:
+        sh = scihub_pdf_url(s, doi)
+        if sh and sh not in urls:
+            urls.append(sh)
     return urls
 
 
@@ -277,6 +354,16 @@ def pdf_to_text(pdf: Path, txt: Path) -> int:
     doc = pymupdf.open(pdf)
     txt.write_text("\n".join(f"<<<PAGE {k}>>>\n{p.get_text()}" for k, p in enumerate(doc, 1)), "utf-8")
     return len(doc)
+
+
+def pdf_to_figures(pdf: Path, fig_dir: Path) -> list[dict]:
+    """Extract figure images from a PDF. Stub — not yet implemented; interface reserved.
+
+    Future: use pymupdf to extract embedded images, match with nearest caption text, and save
+    as PNG files in fig_dir named <stem>_fig_NNN.png.
+    Returns: [{"page": int, "index": int, "path": str, "caption": str, "bbox": [x0, y0, x1, y1]}]
+    """
+    return []
 
 
 def cmd_fetch(a) -> int:
@@ -316,6 +403,9 @@ def cmd_fetch(a) -> int:
         if row["status"] == "downloaded":
             try:
                 row["pages"] = pdf_to_text(pdf, run / "text" / f"{pid}.txt")
+                figs = pdf_to_figures(pdf, run / "text")
+                if figs:
+                    write_jsonl(run / "text" / f"{pid}_figures.jsonl", figs)
                 n_ok += 1
             except Exception as e:  # corrupt PDF
                 row |= {"status": "download corrupt", "note": str(e)}
@@ -332,8 +422,8 @@ def cmd_fetch(a) -> int:
     write_jsonl(run / "papers.jsonl", papers)
     todo = [p for p in papers if not p.get("pages")]
     lines = ["# Papers without full text", "",
-             "Download these through your library (or in a browser for open-access ones the script was blocked from),",
-             "save each as `pdf/<id>.pdf` in this run folder, and re-run `ra.py fetch` to pick them up.", "",
+             "Options: (1) set `SCIHUB_URL` or `EZPROXY_PREFIX` env vars and re-run `ra.py fetch`; "
+             "(2) download through your library and save as `pdf/<id>.pdf`, then re-run fetch.", "",
              "| id | paper | status | link |", "|---|---|---|---|"]
     lines += [f"| {p['paper']} | {cite(p)} {p['title'][:90]} | {p['status']} | https://doi.org/{p['doi']} |" for p in todo]
     (run / "to_download.md").write_text("\n".join(lines) + "\n", "utf-8")
@@ -671,6 +761,8 @@ def main() -> int:
     p = sub.add_parser("new"); p.add_argument("question"); p.add_argument("--reuse", action="store_true")
     p = sub.add_parser("search"); p.add_argument("run"); p.add_argument("--queries", nargs="+", required=True)
     p.add_argument("--since", type=int, default=1990); p.add_argument("--per-query", type=int, default=15)
+    p.add_argument("--seed-dois", nargs="*", default=[], metavar="DOI",
+                   help="DOIs to add regardless of ranking (fetched directly from OpenAlex)")
     p = sub.add_parser("fetch"); p.add_argument("run"); p.add_argument("--max", type=int, default=15,
                                                                        help="stop after this many full texts")
     p = sub.add_parser("verify"); p.add_argument("run")

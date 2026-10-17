@@ -47,6 +47,16 @@ duration, climate, cover crop type). Then:
 
 The script drops any DOI Crossref does not know.
 
+**If you know a specific important paper is missing** (its DOI does not appear in candidates.md — e.g.
+the user mentions one, or you know a landmark study), add it with `--seed-dois`. Seed DOIs are fetched
+directly from OpenAlex by DOI (bypassing ranking cutoffs), verified in Crossref, and added to
+candidates.md exactly like any other paper — they still appear in screen.jsonl and must pass screening:
+
+```bash
+.venv/bin/python tools/ra.py search RUN --queries "q1" "q2" "q3" "q4" \
+    --seed-dois "10.1111/gcb.16632" "10.1038/s41467-021-27500-2"
+```
+
 ## 3. Screen
 
 Read `RUN/candidates.md` in full. Write `RUN/screen.jsonl`, one line per candidate:
@@ -67,8 +77,13 @@ full texts. Aim for roughly 20 included so that ~10–15 end up with full text.
 .venv/bin/python tools/ra.py fetch RUN --max 15
 ```
 
-Closed-access papers are listed, not downloaded. Tell the user which important ones were closed; if they
-drop a PDF into `RUN/pdf/Pnn.pdf` by hand, re-running fetch picks it up.
+Download sources tried in order: OpenAlex OA locations → Semantic Scholar → Unpaywall → EZproxy → Sci-Hub.
+Set env vars to enable the last two before running:
+- `EZPROXY_PREFIX=https://ezproxy.your-institution.edu/login?url=`
+- `SCIHUB_URL=https://sci-hub.se` (or local instance URL)
+
+Closed-access papers that still fail are listed in `to_download.md`. Tell the user which important ones
+were closed; if they drop a PDF into `RUN/pdf/Pnn.pdf` by hand, re-running fetch picks it up.
 
 ## 5. Extract (parallel subagents)
 

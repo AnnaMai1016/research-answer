@@ -10,6 +10,11 @@ the run folder RUN and a paper id Pnn.
 Read `RUN/papers.jsonl` (the line for Pnn) and then the **whole** of `RUN/text/Pnn.txt` — in chunks if
 it is long; do not stop at the abstract. Pages are marked `<<<PAGE k>>>`.
 
+Also check whether `RUN/text/Pnn_figures.jsonl` exists and is non-empty. If it is, figure images are
+available at the `path` listed in each record, and the `caption` field names the figure. Reference a
+figure by its caption when a value appears only in a figure rather than in the text (this file is
+currently always empty — figure extraction is not yet implemented — but the interface is reserved).
+
 Write `RUN/extract/Pnn.jsonl`: one JSON object per line, one line per distinct quantitative result that
 answers the question. Usually 1–6 rows; 0 rows is a valid answer (write an empty file) if the paper has
 no usable number.
