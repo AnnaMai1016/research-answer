@@ -45,6 +45,24 @@ All configuration is through environment variables. Set them before running:
 
 PDF sources are tried in order: **OpenAlex OA locations → Semantic Scholar → Unpaywall → EZproxy → Sci-Hub**.
 
+**How to find your EZproxy prefix:**
+Open any journal article through your library's remote-access portal while off-campus. Copy the URL from
+the browser address bar — it will look like one of these patterns:
+
+```
+https://ezproxy.youruni.edu/login?url=https://doi.org/...         → prefix is everything before "https://doi.org/"
+https://youruni.idm.oclc.org/login?url=https://www.sciencedirect.com/...  → same rule
+```
+
+Set the variable to that prefix (including the trailing `url=`):
+
+```bash
+export EZPROXY_PREFIX="https://ezproxy.youruni.edu/login?url="
+```
+
+If you are not sure, ask your library's IT helpdesk for the "EZproxy base URL" or check the library's
+off-campus / remote-access guide.
+
 **Paper missing from the search results?** Pass its DOI directly — it bypasses the relevance-ranking
 cutoff and is still Crossref-verified and screened by the model:
 

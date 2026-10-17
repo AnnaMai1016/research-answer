@@ -82,8 +82,26 @@ Set env vars to enable the last two before running:
 - `EZPROXY_PREFIX=https://ezproxy.your-institution.edu/login?url=`
 - `SCIHUB_URL=https://sci-hub.se` (or local instance URL)
 
-Closed-access papers that still fail are listed in `to_download.md`. Tell the user which important ones
-were closed; if they drop a PDF into `RUN/pdf/Pnn.pdf` by hand, re-running fetch picks it up.
+**After fetch, always pause and ask the user before continuing.**
+
+Read `RUN/papers.jsonl` and show a concise table of every paper without full text (status ≠ "downloaded"
+and ≠ "added by hand"), grouped as **closed access** and **download blocked**, with id, title and DOI.
+Flag any that look especially important for the question (highly-cited meta-analyses, landmark studies).
+
+Then ask — verbatim or close to it:
+
+> **N papers are missing full text** (see list above).
+>
+> **A — Skip and continue** with the X papers already downloaded. I will note the missing papers in the answer's caveats.
+>
+> **B — Wait for manual downloads.** Drop each PDF into `RUN/pdf/Pnn.pdf` and reply when done; I will re-run fetch and then continue.
+>
+> Which would you prefer? (A / B)
+
+Do **not** proceed to step 5 until the user replies.
+- If **A**: continue immediately.
+- If **B**: once the user confirms the files are in place, re-run `ra.py fetch RUN --max 15`, then show the updated download summary and continue.
+- If all papers already have full text: skip the question and continue.
 
 ## 5. Extract (parallel subagents)
 
