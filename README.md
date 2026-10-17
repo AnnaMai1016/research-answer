@@ -63,6 +63,11 @@ export EZPROXY_PREFIX="https://ezproxy.youruni.edu/login?url="
 If you are not sure, ask your library's IT helpdesk for the "EZproxy base URL" or check the library's
 off-campus / remote-access guide.
 
+> **Note for people sharing this tool:** `EZPROXY_PREFIX` and `SCIHUB_URL` are personal — every user
+> sets their own institution's URL. Do not commit them to the repository. Add them to your shell
+> profile (`~/.zshrc` or `~/.bashrc`) so they are set automatically, or pass them on the command line
+> each time.
+
 **Paper missing from the search results?** Pass its DOI directly — it bypasses the relevance-ranking
 cutoff and is still Crossref-verified and screened by the model:
 
