@@ -341,9 +341,13 @@ def download(s: requests.Session, url: str, dest: Path, depth: int = 0) -> str |
     if r.status_code != 200:
         return f"HTTP {r.status_code}"
     if not r.content.startswith(b"%PDF"):
+        # Follow citation_pdf_url meta tag (many publishers including Wiley)
         m = re.search(rb'<meta[^>]+name="citation_pdf_url"[^>]+content="([^"]+)"', r.content)
         if m and depth == 0:
             return download(s, m.group(1).decode(), dest, 1)
+        # Wiley /epdf/ viewer → try /pdfdirect/ for the raw PDF
+        if depth == 0 and "/doi/epdf/" in url:
+            return download(s, url.replace("/doi/epdf/", "/doi/pdfdirect/"), dest, 1)
         return "not a PDF (landing page or blocked)"
     dest.write_bytes(r.content)
     return None
@@ -390,7 +394,11 @@ def cmd_fetch(a) -> int:
             row |= {"status": "closed access", "note": "get it through your library and save as pdf/" + pdf.name}
         else:
             errors = []
-            for u in oa_urls(s, c["doi"]):
+            urls = oa_urls(s, c["doi"])
+            # Store best OA URL so to_download.md can show a direct browser link
+            if urls:
+                row["oa_url"] = next((u for u in urls if "pdf" in u.lower()), urls[0])
+            for u in urls:
                 err = download(s, u, pdf)
                 if err is None:
                     row |= {"status": "downloaded", "note": u}
@@ -425,7 +433,8 @@ def cmd_fetch(a) -> int:
              "Options: (1) set `SCIHUB_URL` or `EZPROXY_PREFIX` env vars and re-run `ra.py fetch`; "
              "(2) download through your library and save as `pdf/<id>.pdf`, then re-run fetch.", "",
              "| id | paper | status | link |", "|---|---|---|---|"]
-    lines += [f"| {p['paper']} | {cite(p)} {p['title'][:90]} | {p['status']} | https://doi.org/{p['doi']} |" for p in todo]
+    lines += [f"| {p['paper']} | {cite(p)} {p['title'][:90]} | {p['status']} | "
+              f"{p.get('oa_url') or ('https://doi.org/' + p['doi'])} |" for p in todo]
     (run / "to_download.md").write_text("\n".join(lines) + "\n", "utf-8")
     readable = [p for p in papers if p.get("pages")]
     funnel = load_funnel(run) | {"screened_in": len(included), "attempted": len(papers), "full_text": len(readable),
