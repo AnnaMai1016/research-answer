@@ -1,0 +1,90 @@
+{"cand": "C40", "include": true, "reason": "updated meta-analysis of corn yield response to winter cover crops vs no cover"}
+{"cand": "C88", "include": true, "reason": "US-wide satellite analysis of maize and soybean yield change after cover crop adoption"}
+{"cand": "C47", "include": true, "reason": "meta-analysis of subsequent crop yield (incl. corn, soybean) with cover crops in temperate climates"}
+{"cand": "C04", "include": true, "reason": "meta-analysis of cover crop management x environment effects on cash crop yields"}
+{"cand": "C89", "include": true, "reason": "global critical review/meta-analysis incl. cash crop yield change under cover crops"}
+{"cand": "C90", "include": true, "reason": "global analysis of cover crop effects on maize yield via soil carbon"}
+{"cand": "C17", "include": true, "reason": "landmark meta-analysis of cash crop (corn) yield after legume/non-legume cover vs bare fallow"}
+{"cand": "C01", "include": true, "reason": "dryland meta-analysis of cash crop yield change after cover crops vs fallow"}
+{"cand": "C44", "include": true, "reason": "Pampas meta-analysis of cover crop effects on subsequent corn and soybean yield"}
+{"cand": "C02", "include": true, "reason": "meta-analysis of soybean yield after cover crops in Brazil"}
+{"cand": "C38", "include": true, "reason": "European meta-analysis of cover crop effects on succeeding cereal (incl. maize) yield"}
+{"cand": "C48", "include": true, "reason": "China meta-regression of primary crop (incl. maize) yield gain with cover crops"}
+{"cand": "C03", "include": true, "reason": "Iowa field trial: rye cover crop effect on corn and soybean yields"}
+{"cand": "C72", "include": true, "reason": "multi-site trial of cover crop mixtures on maize and soybean yield"}
+{"cand": "C43", "include": true, "reason": "Iowa field study of cover crop effects on corn and soybean yield"}
+{"cand": "C33", "include": true, "reason": "Illinois no-till corn/soybean with winter cover crops, reports yields"}
+{"cand": "C31", "include": true, "reason": "cover crop effects on maize yield under drought, multi-site field data"}
+{"cand": "C46", "include": true, "reason": "summer cover crops effect on subsequent crop yield, Kansas field experiment"}
+{"cand": "C58", "include": true, "reason": "semi-arid field trial of individual cover crop species on maize yield"}
+{"cand": "C68", "include": true, "reason": "meta-database calculator of cover crop effects on cash crop yield"}
+{"cand": "C16", "include": true, "reason": "field experiment of cover crop and tillage on corn and soybean yields"}
+{"cand": "C75", "include": true, "reason": "Tennessee corn-soybean field trial of cover crop diversity on yield"}
+{"cand": "C63", "include": true, "reason": "field trial of multispecies cover crop on corn/soybean yield"}
+{"cand": "C64", "include": true, "reason": "long-term no-till soybean yield with cover crops, Brazil"}
+{"cand": "C11", "include": true, "reason": "12 cereal cover crop cultivars, subsequent no-till corn yield"}
+{"cand": "C10", "include": true, "reason": "soybean yield response to cover crop in Ohio field trials"}
+{"cand": "C84", "include": true, "reason": "maize yield after cover crop introduction, Italy field experiment"}
+{"cand": "C70", "include": true, "reason": "maize yield with winter rye cover crop vs none, Minnesota"}
+{"cand": "C60", "include": true, "reason": "ten meta-analyses incl. cash crop yield under cover crops, California/Mediterranean"}
+{"cand": "C05", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C06", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C07", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C08", "include": false, "reason": "soil carbon only"}
+{"cand": "C09", "include": false, "reason": "soil carbon only"}
+{"cand": "C12", "include": false, "reason": "simulation only"}
+{"cand": "C13", "include": false, "reason": "modelling only"}
+{"cand": "C14", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C15", "include": false, "reason": "soil biology"}
+{"cand": "C18", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C19", "include": false, "reason": "sweet corn, mycorrhizal focus"}
+{"cand": "C20", "include": false, "reason": "organic vegetables"}
+{"cand": "C21", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C22", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C23", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C24", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C25", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C26", "include": false, "reason": "nitrate leaching only"}
+{"cand": "C27", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C28", "include": false, "reason": "simulation only"}
+{"cand": "C29", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C30", "include": false, "reason": "soil bacteria"}
+{"cand": "C32", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C34", "include": false, "reason": "rotations/amendments, low priority"}
+{"cand": "C35", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C36", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C37", "include": false, "reason": "rotation/tillage not cover crops"}
+{"cand": "C39", "include": false, "reason": "soil nutrients"}
+{"cand": "C41", "include": false, "reason": "weed suppression only"}
+{"cand": "C42", "include": false, "reason": "rotation/tillage not cover crops"}
+{"cand": "C45", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C49", "include": false, "reason": "stover removal, not cover crop"}
+{"cand": "C50", "include": false, "reason": "soil microbiome"}
+{"cand": "C51", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C52", "include": false, "reason": "N2O only"}
+{"cand": "C53", "include": false, "reason": "mycorrhizas"}
+{"cand": "C54", "include": false, "reason": "SOC synthesis"}
+{"cand": "C55", "include": false, "reason": "qualitative review"}
+{"cand": "C56", "include": false, "reason": "anaerobic digestion"}
+{"cand": "C57", "include": false, "reason": "crop diversity broadly, low priority"}
+{"cand": "C59", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C61", "include": false, "reason": "modelling only"}
+{"cand": "C62", "include": false, "reason": "weed review"}
+{"cand": "C65", "include": false, "reason": "Earth-system modelling"}
+{"cand": "C66", "include": false, "reason": "soil water"}
+{"cand": "C67", "include": false, "reason": "soil C/N"}
+{"cand": "C69", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C71", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C73", "include": false, "reason": "probabilistic modelling"}
+{"cand": "C74", "include": false, "reason": "SOC"}
+{"cand": "C76", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C77", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C78", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C79", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C80", "include": false, "reason": "sweet corn"}
+{"cand": "C81", "include": false, "reason": "broccoli"}
+{"cand": "C82", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}
+{"cand": "C83", "include": false, "reason": "rhizosphere microbiota"}
+{"cand": "C85", "include": false, "reason": "forage quality, off-topic"}
+{"cand": "C86", "include": false, "reason": "N2O"}
+{"cand": "C87", "include": false, "reason": "single small/specialized study or not a clean cover vs no-cover yield comparison; lower priority"}

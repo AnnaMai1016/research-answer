@@ -1,0 +1,15 @@
+{
+  "search_hits": 90,
+  "doi_unverifiable": 0,
+  "candidates": 90,
+  "screened_in": 29,
+  "attempted": 29,
+  "full_text": 27,
+  "closed_access": 0,
+  "oa_blocked": 2,
+  "rows_extracted": 130,
+  "rows_quote_ok": 114,
+  "rows_accepted": 86,
+  "rows_rejected_by_reviewer": 28,
+  "rows_corrected_by_reviewer": 34
+}
