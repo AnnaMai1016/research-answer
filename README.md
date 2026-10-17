@@ -33,8 +33,25 @@ Non-interactive, straight from the shell:
 claude -p "/research-answer How much do cover crops change soil organic carbon?" --permission-mode acceptEdits
 ```
 
-Optional: `export CONTACT_EMAIL=you@university.edu` puts API requests in OpenAlex's and Crossref's
-polite pool, and also asks Unpaywall for open-access copies.
+## Configuration
+
+All configuration is through environment variables. Set them before running:
+
+| Variable | Purpose | Example |
+|---|---|---|
+| `CONTACT_EMAIL` | Polite-pool requests to OpenAlex / Crossref; enables Unpaywall OA lookup | `you@university.edu` |
+| `SCIHUB_URL` | Adds Sci-Hub as a last-resort PDF source (after all OA attempts fail) | `https://sci-hub.se` |
+| `EZPROXY_PREFIX` | Wraps publisher URLs with your institution's EZproxy login prefix | `https://ezproxy.univ.edu/login?url=` |
+
+PDF sources are tried in order: **OpenAlex OA locations → Semantic Scholar → Unpaywall → EZproxy → Sci-Hub**.
+
+**Paper missing from the search results?** Pass its DOI directly — it bypasses the relevance-ranking
+cutoff and is still Crossref-verified and screened by the model:
+
+```bash
+.venv/bin/python tools/ra.py search RUN --queries "..." \
+    --seed-dois "10.1111/gcb.16632" "10.1038/s41467-021-27500-2"
+```
 
 ## How it works
 
@@ -73,13 +90,29 @@ existence, downloads, string matching of quotes against the PDF, citation bookke
 agents never see the extractor's reasoning, only its output, so they serve as a second reader rather than
 a rubber stamp.
 
-| Piece | File |
-|---|---|
-| Orchestrator (the slash command) | [.claude/skills/research-answer/SKILL.md](.claude/skills/research-answer/SKILL.md) |
-| Extractor agent | [.claude/agents/evidence-extractor.md](.claude/agents/evidence-extractor.md) |
-| Reviewer agent | [.claude/agents/evidence-reviewer.md](.claude/agents/evidence-reviewer.md) |
-| Baseline agent | [.claude/agents/baseline-answerer.md](.claude/agents/baseline-answerer.md) |
-| Deterministic tools | [tools/ra.py](tools/ra.py) |
+### Three layers
+
+**Orchestration layer — [`SKILL.md`](.claude/skills/research-answer/SKILL.md).** This file *is* the
+`/research-answer` slash command. It tells the orchestrator (Claude) the exact sequence of steps to
+run, which `ra.py` commands to call, and when to spawn subagents. The orchestrator makes every
+judgement call: what queries to write, which papers to include, how to synthesise the answer.
+
+**Deterministic layer — [`tools/ra.py`](tools/ra.py).** A plain Python script with no language-model
+calls. It does everything that *can be checked mechanically*: querying OpenAlex and Crossref,
+downloading PDFs, converting PDF pages to numbered text, checking that each extracted quote actually
+occurs in the paper on the stated page, verifying that the answer's numbers match cited rows.
+
+**Subagent layer — the `.claude/agents/` files.** Three specialised agents spawned by the
+orchestrator during a run:
+
+| Agent | File | What it does |
+|---|---|---|
+| Evidence extractor | [`evidence-extractor.md`](.claude/agents/evidence-extractor.md) | Reads one paper's full text; extracts value + unit + verbatim quote + page per result |
+| Evidence reviewer | [`evidence-reviewer.md`](.claude/agents/evidence-reviewer.md) | Reads the same paper cold, without the extractor's reasoning; accepts / corrects / rejects each row |
+| Baseline answerer | [`baseline-answerer.md`](.claude/agents/baseline-answerer.md) | Answers the question from memory with no tools — the "just ask the chatbot" control condition |
+
+The extractor and reviewer never share a context window, which makes the reviewer a genuine second
+reader rather than a rubber stamp.
 
 ## What a run produces
 
@@ -112,9 +145,11 @@ correctly quoted number answers the question. So evaluation has three layers:
 
 ## Limitations
 
-- **It only reads open access.** Closed-access papers, often the key meta-analyses, are listed in
-  `to_download.md`. Drop PDFs from your library into `pdf/Pnn.pdf` and re-run `fetch`.
-- Some publishers block scripted downloads even of open-access papers.
+- **Closed-access papers are not downloaded automatically.** They are listed in `to_download.md`.
+  Options: (1) set `SCIHUB_URL` or `EZPROXY_PREFIX` and re-run `fetch`; (2) download through your
+  library and drop the PDF into `pdf/Pnn.pdf`, then re-run `fetch` to pick it up.
+- Some publishers block scripted downloads even of open-access papers (rate limiting, CAPTCHA, IP
+  blocks). Sci-Hub and EZproxy are tried as fallbacks if configured.
 - Tables and figures come out of PDF text extraction poorly, so numbers that appear only in a figure are missed.
 - Meta-analyses pool overlapping field studies. The answer is told not to treat them as independent,
   but nothing enforces this.
