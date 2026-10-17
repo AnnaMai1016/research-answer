@@ -11,5 +11,10 @@
   "rows_quote_ok": 114,
   "rows_accepted": 86,
   "rows_rejected_by_reviewer": 28,
-  "rows_corrected_by_reviewer": 34
+  "rows_corrected_by_reviewer": 34,
+  "answer_citations": 93,
+  "answer_bad_citations": 0,
+  "answer_unbacked_numbers": 0,
+  "baseline_refs": 7,
+  "baseline: real, matches": 7
 }
