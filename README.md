@@ -33,49 +33,6 @@ Non-interactive, straight from the shell:
 claude -p "/research-answer How much do cover crops change soil organic carbon?" --permission-mode acceptEdits
 ```
 
-## Configuration
-
-All configuration is through environment variables. Set them before running:
-
-| Variable | Purpose | Example |
-|---|---|---|
-| `CONTACT_EMAIL` | Polite-pool requests to OpenAlex / Crossref; enables Unpaywall OA lookup | `you@university.edu` |
-| `SCIHUB_URL` | Adds Sci-Hub as a last-resort PDF source (after all OA attempts fail) | `https://sci-hub.se` |
-| `EZPROXY_PREFIX` | Wraps publisher URLs with your institution's EZproxy login prefix | `https://ezproxy.univ.edu/login?url=` |
-
-PDF sources are tried in order: **OpenAlex OA locations → Semantic Scholar → Unpaywall → EZproxy → Sci-Hub**.
-
-**How to find your EZproxy prefix:**
-Open any journal article through your library's remote-access portal while off-campus. Copy the URL from
-the browser address bar — it will look like one of these patterns:
-
-```
-https://ezproxy.youruni.edu/login?url=https://doi.org/...         → prefix is everything before "https://doi.org/"
-https://youruni.idm.oclc.org/login?url=https://www.sciencedirect.com/...  → same rule
-```
-
-Set the variable to that prefix (including the trailing `url=`):
-
-```bash
-export EZPROXY_PREFIX="https://ezproxy.youruni.edu/login?url="
-```
-
-If you are not sure, ask your library's IT helpdesk for the "EZproxy base URL" or check the library's
-off-campus / remote-access guide.
-
-> **Note for people sharing this tool:** `EZPROXY_PREFIX` and `SCIHUB_URL` are personal — every user
-> sets their own institution's URL. Do not commit them to the repository. Add them to your shell
-> profile (`~/.zshrc` or `~/.bashrc`) so they are set automatically, or pass them on the command line
-> each time.
-
-**Paper missing from the search results?** Pass its DOI directly — it bypasses the relevance-ranking
-cutoff and is still Crossref-verified and screened by the model:
-
-```bash
-.venv/bin/python tools/ra.py search RUN --queries "..." \
-    --seed-dois "10.1111/gcb.16632" "10.1038/s41467-021-27500-2"
-```
-
 ## How it works
 
 ```
@@ -184,3 +141,47 @@ correctly quoted number answers the question. So evaluation has three layers:
   paper or a decision, a human reads the source.
 - Full texts stay on your machine. Do not commit `pdf/` or `text/`, or redistribute them.
 - The baseline exists to show, on your own question, what goes wrong without retrieval and verification.
+
+## Configuration (Can be ignored)
+
+All configuration is through environment variables. The tool works without any of these — they only
+help if you need access to papers behind a paywall or want better search coverage.
+
+| Variable | Purpose | Example |
+|---|---|---|
+| `CONTACT_EMAIL` | Polite-pool requests to OpenAlex / Crossref; enables Unpaywall OA lookup | `you@university.edu` |
+| `SCIHUB_URL` | Adds Sci-Hub as a last-resort PDF source (after all OA attempts fail) | `https://sci-hub.se` |
+| `EZPROXY_PREFIX` | Wraps publisher URLs with your institution's EZproxy login prefix | `https://ezproxy.univ.edu/login?url=` |
+
+PDF sources are tried in order: **OpenAlex OA locations → Semantic Scholar → Unpaywall → EZproxy → Sci-Hub**.
+
+**How to find your EZproxy prefix:**
+Open any journal article through your library's remote-access portal while off-campus. Copy the URL from
+the browser address bar — it will look like one of these patterns:
+
+```
+https://ezproxy.youruni.edu/login?url=https://doi.org/...         → prefix is everything before "https://doi.org/"
+https://youruni.idm.oclc.org/login?url=https://www.sciencedirect.com/...  → same rule
+```
+
+Set the variable to that prefix (including the trailing `url=`):
+
+```bash
+export EZPROXY_PREFIX="https://ezproxy.youruni.edu/login?url="
+```
+
+If you are not sure, ask your library's IT helpdesk for the "EZproxy base URL" or check the library's
+off-campus / remote-access guide.
+
+> **Note for people sharing this tool:** `EZPROXY_PREFIX` and `SCIHUB_URL` are personal — every user
+> sets their own institution's URL. Do not commit them to the repository. Add them to your shell
+> profile (`~/.zshrc` or `~/.bashrc`) so they are set automatically, or pass them on the command line
+> each time.
+
+**Paper missing from the search results?** Pass its DOI directly — it bypasses the relevance-ranking
+cutoff and is still Crossref-verified and screened by the model:
+
+```bash
+.venv/bin/python tools/ra.py search RUN --queries "..." \
+    --seed-dois "10.1111/gcb.16632" "10.1038/s41467-021-27500-2"
+```
