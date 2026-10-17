@@ -1,0 +1,3 @@
+{"row": "P15-E1", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "MAOC fraction only; topsoil primarily 0-20 cm; global meta-analysis restricted to arid/temperate/boreal climates relevant to Europe; n=16 after outlier removal"}
+{"row": "P15-E2", "verdict": "correct", "issue": "Page claimed as 12 but quote is on page 11 (confirmed by script page_found=11)", "corrected": {"page": 11}, "context_note": "POC fraction only; topsoil primarily 0-20 cm; n=39 after outlier removal"}
+{"row": "P15-E3", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "MBC (microbial biomass carbon) fraction only; topsoil primarily 0-20 cm; 9 of 30 studies conducted in Europe; n=30 after outlier removal"}

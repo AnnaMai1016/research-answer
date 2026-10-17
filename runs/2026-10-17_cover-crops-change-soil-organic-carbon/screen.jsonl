@@ -1,0 +1,78 @@
+{"cand": "C20", "include": true, "reason": "landmark meta-analysis (2014, 1641 citations) of carbon sequestration via cover crops globally; reports quantitative SOC changes in Mg C/ha/yr"}
+{"cand": "C05", "include": true, "reason": "global meta-analysis of cropland SOC changes due to cover cropping; reports effect size in Mg C/ha/yr with moderator breakdowns"}
+{"cand": "C02", "include": true, "reason": "global meta-analysis of cover crop response on SOC within corn systems, 198 paired comparisons, reports 7.3% SOC increase and rates"}
+{"cand": "C68", "include": true, "reason": "highly cited (1192) synthesis of cover crops and ecosystem services in temperate soils; includes quantitative SOC data across climate zones"}
+{"cand": "C40", "include": true, "reason": "meta-analysis of soil carbon sequestration under climate-smart agriculture including cover crops; reports cover-crop-specific SOC rates"}
+{"cand": "C12", "include": true, "reason": "field experiment synthesis on temperate cover crop management and SOC stocks; quantitative cover-crop vs no-cover-crop comparisons"}
+{"cand": "C06", "include": true, "reason": "deep soil inventory study separating cover crop vs compost effects on SOC; addresses under-sampling at depth problem"}
+{"cand": "C38", "include": true, "reason": "field experiment comparing cover crop functional types (legume/grass/brassica) effects on SOC content and composition; quantitative comparisons"}
+{"cand": "C11", "include": true, "reason": "review with quantitative comparisons of SOC under cover crops vs controls, combined with tillage/amendments; reports effect sizes"}
+{"cand": "C28", "include": true, "reason": "long-term (decades) field experiment measuring SOC under tillage and cover crops; quantitative SOC data at multiple depths"}
+{"cand": "C59", "include": true, "reason": "meta-analysis/synthesis of crop residues, cover crops, manures and nitrogen fertilization effects on SOC; cover-crop-specific data"}
+{"cand": "C25", "include": true, "reason": "field experiment showing cover crops enhance SOC and carbon dynamics; quantitative cover crop vs fallow comparison"}
+{"cand": "C01", "include": true, "reason": "regional meta-analysis (pampas, 247 citations) of cover crop effects on soils including SOC; quantitative effect sizes"}
+{"cand": "C13", "include": true, "reason": "meta-analysis of SOC fractions response to cover cropping; quantitative data on labile vs stable SOC pools"}
+{"cand": "C04", "include": true, "reason": "meta-analysis of cover crop effects on pool-specific SOC (2024); reports SOC changes by depth and fraction"}
+{"cand": "C76", "include": true, "reason": "systematic review of universal soil responses to cover cropping (2022); quantitative SOC synthesis across regions"}
+{"cand": "C32", "include": true, "reason": "long-term field study of cover crop impacts on SOC in central US; quantitative rates with duration effects"}
+{"cand": "C07", "include": true, "reason": "Nature Sustainability paper quantifying yield benefits linked to SOC increases from cover cropping; reports SOC and yield numbers"}
+{"cand": "C15", "include": true, "reason": "long-term field insights on maximizing SOC stocks under cover cropping; quantitative data with management moderators"}
+{"cand": "C08", "include": true, "reason": "field modelling study with observed data on cover crop potential to increase SOC in German croplands; quantitative SOC rates"}
+{"cand": "C30", "include": true, "reason": "field study on cumulative impact of cover crops on soil carbon sequestration; quantitative rates over multiple years"}
+{"cand": "C74", "include": true, "reason": "2024 review of cover crop roots in SOC accrual; reports root-derived vs shoot-derived SOC contributions quantitatively"}
+{"cand": "C09", "include": true, "reason": "2025 paper on erosion-mediated SOC gains under cover crops; reports quantitative SOC change rates"}
+{"cand": "C03", "include": false, "reason": "focuses on SOC fractions response to multiple agronomic factors broadly, not a cover-crop vs no-cover-crop comparison"}
+{"cand": "C10", "include": false, "reason": "narrative review of cover crops and soil quality; lacks quantitative SOC comparisons with effect sizes"}
+{"cand": "C14", "include": false, "reason": "organic carbon in orchard soil with organic fertilization, not a cover crop vs no-cover-crop comparison"}
+{"cand": "C16", "include": false, "reason": "MethodsX protocol paper describing a meta-analysis method, not reporting results or evidence"}
+{"cand": "C17", "include": false, "reason": "very specific Oxisol study in Bragantia; SOC fractions under tillage, not a direct cover crop comparison"}
+{"cand": "C18", "include": false, "reason": "Zenodo data repository deposit, not a peer-reviewed journal article"}
+{"cand": "C19", "include": false, "reason": "SOC fractions in orchard cover crops; depth-specific but orchard context limits generalizability"}
+{"cand": "C21", "include": false, "reason": "1997 study focused on soil aggregation, not SOC stocks; predates modern cover crop literature"}
+{"cand": "C22", "include": false, "reason": "SOC and tomato yield study; cover cropping is one of several factors, no isolated cover-crop SOC effect size reported"}
+{"cand": "C23", "include": false, "reason": "soil organic fractions under crop-livestock integration, not cover crop vs no-cover-crop comparison"}
+{"cand": "C24", "include": false, "reason": "tillage and cover cropping combined effects on multiple soil properties; SOC not the primary outcome"}
+{"cand": "C26", "include": false, "reason": "conservation tillage and organic farming reduce soil erosion; SOC is secondary to erosion outcomes"}
+{"cand": "C27", "include": false, "reason": "meta-analysis of soil CO2 and N2O emissions by cover crops; greenhouse gas focus, not SOC storage"}
+{"cand": "C29", "include": false, "reason": "Open Journal of Soil Science (OMICS group, predatory publisher); quality concern outweighs potential evidence"}
+{"cand": "C31", "include": false, "reason": "long-term organic farming on citrus plantation; not a cover crop vs no-cover-crop SOC comparison"}
+{"cand": "C33", "include": false, "reason": "long-term soil quality in organic vs conventional systems; cover crops not the main variable"}
+{"cand": "C34", "include": false, "reason": "nitrate leaching under winter cover crop management; not an SOC outcome study"}
+{"cand": "C35", "include": false, "reason": "tillage, cover cropping, and poultry litter effects; SOC not isolated from other amendments"}
+{"cand": "C36", "include": false, "reason": "long-term no-tillage and cropping system management on SOC; cover crop not independently evaluated"}
+{"cand": "C37", "include": false, "reason": "cover crop and no-tillage for soil health; confounded with tillage effects, SOC not separated"}
+{"cand": "C39", "include": false, "reason": "priming effects of cover crop residues on SOC; mechanistic study without stock-level cover crop vs no-cover-crop comparison"}
+{"cand": "C41", "include": false, "reason": "soil conservation strategies; qualitative and focused on erosion, not SOC stocks"}
+{"cand": "C42", "include": false, "reason": "long-term tillage and cover crop SOC study but only 6 citations; also paywalled and lower priority given coverage by meta-analyses"}
+{"cand": "C43", "include": false, "reason": "short-term carbon inputs to soil; measures C inputs not SOC stock change, and confounded by cropping history"}
+{"cand": "C44", "include": false, "reason": "cover crops and soil structure, macroaggregate carbon distribution; not a cover-crop vs no-cover-crop SOC stock comparison"}
+{"cand": "C45", "include": false, "reason": "cover crops alleviating effects of reduced tillage; confounded with tillage, not a pure cover crop SOC effect"}
+{"cand": "C46", "include": false, "reason": "runoff, soil erosion and organic carbon under tillage; SOC secondary to erosion outcomes"}
+{"cand": "C47", "include": false, "reason": "cattle grazing of cover crops and soil physical responses; not an SOC comparison study"}
+{"cand": "C48", "include": false, "reason": "perennial ryegrass cover crop on SOC stocks; single species, one region, lower evidence value given meta-analyses available"}
+{"cand": "C49", "include": false, "reason": "methodology paper on soil sampling depth and carbon storage underestimation; no cover crop treatment comparison"}
+{"cand": "C50", "include": false, "reason": "null result (3-year study showing no SOC change); short duration limits comparability, lower priority given meta-analyses"}
+{"cand": "C51", "include": false, "reason": "cover cropping in Mediterranean agroecosystems; insufficient citations (41) and narrow regional focus given inclusion of meta-analyses"}
+{"cand": "C52", "include": false, "reason": "purely modelling approach for conservation agriculture SOC; no observed field comparison"}
+{"cand": "C53", "include": false, "reason": "tillage, cover crops and nitrogen fertilization effects on soil nitrogen and carbon; too confounded to isolate cover crop SOC effect"}
+{"cand": "C54", "include": false, "reason": "2026 review, only 1 citation; too recent to assess quality, lower priority given stronger meta-analyses available"}
+{"cand": "C55", "include": false, "reason": "broad SOC sequestration review in context of climate change mitigation; not cover-crop specific"}
+{"cand": "C56", "include": false, "reason": "conceptual/definitional review of soil carbon sequestration; no cover crop-specific quantitative evidence"}
+{"cand": "C57", "include": false, "reason": "plant nutrition under climate change and SOC sequestration; not about cover crops"}
+{"cand": "C58", "include": false, "reason": "Journal of Environmental Protection, low-quality venue; broad cropping systems, not cover-crop-specific SOC comparisons"}
+{"cand": "C60", "include": false, "reason": "SOC stabilization in soils (2004); not cover-crop specific, conceptual, low relevance"}
+{"cand": "C61", "include": false, "reason": "soil management for carbon sequestration; broad review, not cover-crop specific"}
+{"cand": "C62", "include": false, "reason": "global synthesis of cover crop impacts on main crop yield; yield outcome, not SOC"}
+{"cand": "C63", "include": false, "reason": "grasses and legumes cover crops on sandy soil physical quality; physical properties focus, 0 citations in 2026"}
+{"cand": "C64", "include": false, "reason": "global synthesis of agricultural practices on yield, SOC and soil health; multiple practices confounded, not cover-crop-specific"}
+{"cand": "C65", "include": false, "reason": "legume cover crops and weed management; SOC secondary to weed management focus"}
+{"cand": "C66", "include": false, "reason": "multispecies cover crop mixture on soil properties and crop yield; yield and aggregation focus, not SOC stocks"}
+{"cand": "C67", "include": false, "reason": "changes in SOC under perennial crops; perennial crops (orchards, etc.) not traditional annual cover crops"}
+{"cand": "C69", "include": false, "reason": "meta-analysis of cover crops and soil microbiome; microbiome focus, not SOC stocks"}
+{"cand": "C70", "include": false, "reason": "combined impact of no-tillage and cover crops on SOC; confounded with tillage treatment"}
+{"cand": "C71", "include": false, "reason": "perennial grass bioenergy cropping systems; not traditional cover crops"}
+{"cand": "C72", "include": false, "reason": "rice paddy SOC as carbon store; not about cover crops"}
+{"cand": "C73", "include": false, "reason": "legume cover crop effects on sugarcane yields; yield focus, tropical sugarcane context"}
+{"cand": "C75", "include": false, "reason": "OENO One journal (wine/viticulture); off-topic journal for soil science, viticulture context"}
+{"cand": "C77", "include": false, "reason": "reduced tillage impacts on GHG emissions and SOC; GHG/tillage focus, cover crop is incidental"}
+{"cand": "C78", "include": false, "reason": "cover crop and crop residue removal effects on SOC dynamics; residue removal is a confounder, not a clean cover crop comparison"}

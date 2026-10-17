@@ -1,0 +1,22 @@
+{
+  "search_hits": 78,
+  "doi_unverifiable": 0,
+  "candidates": 78,
+  "screened_in": 23,
+  "attempted": 23,
+  "full_text": 13,
+  "closed_access": 3,
+  "oa_blocked": 7,
+  "rows_extracted": 53,
+  "rows_quote_ok": 53,
+  "rows_accepted": 46,
+  "rows_rejected_by_reviewer": 5,
+  "rows_corrected_by_reviewer": 9,
+  "answer_citations": 59,
+  "answer_bad_citations": 0,
+  "answer_unbacked_numbers": 0,
+  "baseline_refs": 8,
+  "baseline: real, matches": 2,
+  "baseline: real paper, DOI wrong or missing": 3,
+  "baseline: DOI exists but is a different paper": 3
+}

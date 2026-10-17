@@ -1,0 +1,6 @@
+{"row": "P18-E1", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "soil_depth_cm 0-18.4 is the mean sampling depth across studies (± 7.3 cm SD), not a fixed depth range; comparison is cover crop vs. bare fallow or spontaneous off-season regrowth per study selection criteria"}
+{"row": "P18-E2", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "Legume cover crop subgroup from ΔSOC model; same paired-observation dataset (n=434) as E1"}
+{"row": "P18-E3", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "Non-legume cover crop subgroup from ΔSOC model; same paired-observation dataset (n=434) as E1"}
+{"row": "P18-E4", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "Modeled estimate at low initial SOC value (6.3 g/kg = mean minus 1 SD); not a separate subset count, model prediction from continuous moderator"}
+{"row": "P18-E5", "verdict": "accept", "issue": "", "corrected": {}, "context_note": "Modeled estimate at average initial SOC value (15.5 g/kg); same note as E4 regarding model prediction vs. subset count"}
+{"row": "P18-E6", "verdict": "reject", "issue": "Secondary result: value is from Poeplau & Don (2015) reference 13, cited in the background section of this paper, not this paper's own finding. Extractor correctly flagged secondary=true.", "corrected": {}, "context_note": ""}

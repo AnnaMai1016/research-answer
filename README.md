@@ -115,12 +115,10 @@ correctly quoted number answers the question. So evaluation has three layers:
 - **It only reads open access.** Closed-access papers, often the key meta-analyses, are listed in
   `to_download.md`. Drop PDFs from your library into `pdf/Pnn.pdf` and re-run `fetch`.
 - Some publishers block scripted downloads even of open-access papers.
-- Tables and figures come out of PDF text extraction poorly, so numbers that appear only in a figure are
-  missed.
+- Tables and figures come out of PDF text extraction poorly, so numbers that appear only in a figure are missed.
 - Meta-analyses pool overlapping field studies. The answer is told not to treat them as independent,
   but nothing enforces this.
-- Screening is done by a model reading abstracts. Relevant papers can be excluded, and you will not see
-  that unless you read `screen.jsonl`.
+- Screening is done by a model reading abstracts. Relevant papers can be excluded, and you will not see that unless you read `screen.jsonl`.
 
 ## Responsible use
 
