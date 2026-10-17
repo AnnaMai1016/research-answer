@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python tools/ra.py:*)",
+      "Bash(test -x .venv/bin/python:*)",
+      "Bash(python3 -m venv .venv:*)",
+      "Bash(.venv/bin/pip install:*)",
+      "Read(./runs/**)",
+      "Edit(./runs/**)",
+      "Write(./runs/**)",
+      "Grep(./runs/**)"
+    ]
+  }
+}

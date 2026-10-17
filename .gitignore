@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+.DS_Store
+# full texts are copyrighted: keep them local, never commit
+runs/*/pdf/
+runs/*/text/
